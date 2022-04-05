@@ -4,9 +4,11 @@ $LOAD_PATH.unshift File.dirname(__FILE__)
 
 require "logger"
 require "stringio"
+require "pry"
 
 require "ruby_av/version"
 require "ruby_av/media"
+require "ruby_av/filter_complex"
 require "ruby_av/transcoder"
 require "ruby_av/input"
 require "ruby_av/encoder"

@@ -104,7 +104,7 @@ module RubyAv
       if encoding_succeeded?
         yield(1.0) if block_given?
 
-        RubyAv.logger.info "Transcoding of #{input} to #{@output_file} succeeded\n"
+        RubyAv.logger.info "Transcoding to #{@output_file} succeeded\n"
       else
         errors = "Errors: #{@errors.join(", ")}. "
         RubyAv.logger.error "Failed encoding...\n#{command}\n\n#{@output}\n#{errors}\n"

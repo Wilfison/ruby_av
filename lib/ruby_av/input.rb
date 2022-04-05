@@ -2,10 +2,12 @@ require "pry"
 
 module RubyAv
   class Input
-    attr_accessor :path, :opts
+    attr_accessor :path, :opts, :mapper, :media
 
     def initialize(path, opts = {})
       @path = path
+      @media = RubyAv::Media.new(path)
+      @mapper = opts[:mapper] || "v"
       @opts = EncodingOptions.new(opts)
     end
 
