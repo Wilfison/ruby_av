@@ -16,8 +16,10 @@ module RubyAv
         2
       when /preset/
         3
-      else
+      when "vf", "af"
         4
+      else
+        5
       end
     end
 
@@ -29,7 +31,8 @@ module RubyAv
       keys.sort_by { |k_ord| params_order(k_ord) }.each do |key|
         value = self[key]
         a = send("convert_#{key}", value) if value && supports_option?(key)
-        params += a unless a.nil?
+        params += a unless a.nil? || value.nil?
+        params += ["-#{key}", value] if a.nil? && value
       end
 
       params += convert_aspect(calculate_aspect) if calculate_aspect?
