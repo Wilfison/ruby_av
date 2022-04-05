@@ -1,6 +1,7 @@
 require "open3"
 
 module RubyAv
+  # Class that executes FFMPEG commands
   class Transcoder
     attr_reader :command, :output_file, :validate
 
@@ -17,6 +18,8 @@ module RubyAv
       @errors = []
     end
 
+    # run commands {|pregress| ... }
+    # @yield [Number] return a transcoder progress
     def run(&block)
       transcode_media(&block)
 
@@ -29,6 +32,7 @@ module RubyAv
       nil
     end
 
+    # @return [Media] Encoded output file
     def encoded
       @encoded ||= Media.new(output_file) if File.exist?(output_file)
     end
@@ -85,7 +89,7 @@ module RubyAv
         raise Error, "Process hung. Full output: #{@output}"
       end
     end
-    # rubocop:enable Metrics/CyclomaticComplexity, Metrics/AbcSize, Metrics/MethodLength, Metrics/PerceivedComplexity
+    # rubocop:enable Metrics/CyclomaticComplexity, Metrics/AbcSize, Metrics/PerceivedComplexity
 
     def fix_encoding(output)
       output[/test/]
