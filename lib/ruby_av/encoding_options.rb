@@ -150,8 +150,8 @@ module RubyAv
 
     def convert_screenshot(value)
       result = []
-      unless self[:vframes]
-        result << "-vframes"
+      unless self[:frames]
+        result << "-frames:v"
         result << 1
       end
       result << "-f"
@@ -163,8 +163,8 @@ module RubyAv
       ["-q:v", value]
     end
 
-    def convert_vframes(value)
-      ["-vframes", value]
+    def convert_frames(value)
+      ["-frames:v", value]
     end
 
     def convert_x264_vprofile(value)

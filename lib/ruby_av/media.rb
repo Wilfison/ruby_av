@@ -180,23 +180,16 @@ module RubyAv
       end
     end
 
-    def audio_channel_layout
-      # TODO: Whenever support for ffmpeg/ffprobe 1.2.1 is dropped this is no longer needed
-      @audio_channel_layout || case audio_channels
-                               when 1
-                                 "stereo"
-                               when 2
-                                 "stereo"
-                               when 6
-                                 "5.1"
-                               else
-                                 "unknown"
-                               end
-    end
+    # Capture screenshot from media
+    #
+    # @param output_file [String] path to screenshot output
+    # @param options [Hash] with seek_time and frames options
+    def screenshot(output_file, options = {}, &block)
+      opts = EncodingOptions.new({ screenshot: true, seek_time: "00:00:01", frames: 1 }.merge!(options))
+      raw_options = ["-i", path, *opts.to_a]
 
-    # def screenshot(output_file, options = EncodingOptions.new, transcoder_options = {}, &block)
-    #   Transcoder.new(self, output_file, options.merge(screenshot: true), transcoder_options).run(&block)
-    # end
+      Transcoder.new(output_file, raw_options, validate: true).run(&block)
+    end
 
     protected
 
