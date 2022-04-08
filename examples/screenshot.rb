@@ -1,3 +1,6 @@
+#!/usr/bin/env ruby
+# frozen_string_literal: true
+
 require_relative "../lib/ruby_av"
 
 output_path = "#{Dir.pwd}/tmp"
@@ -10,6 +13,7 @@ media.screenshot("#{output_path}/output.png")
 # seek_time = HH:MM:SS.MILLISECONDS
 media.screenshot("#{output_path}/output_3s.png", seek_time: "00:00:03")
 
+# capture 1 frame on 5s
 # with custom resolution
 media.screenshot(
   "#{output_path}/output_#{opts1[:resolution]}.png",

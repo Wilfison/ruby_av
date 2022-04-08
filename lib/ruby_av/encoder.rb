@@ -1,7 +1,7 @@
 module RubyAv
   # Create a new enconder
   class Encoder
-    include RubyAv::FilterConplex
+    include RubyAv::Filters
 
     # Array of FFMPEG maps
     # ex: ['[v]', '[outAudio]']
@@ -15,6 +15,15 @@ module RubyAv
     # @return [String] output file path
     attr_accessor :output_file
 
+    # Options to set before output file
+    # Ex: ['-c', 'copy']
+    #
+    # @return [Array
+    attr_accessor :other_options
+
+    # @return [Array] options to set before input entry
+    attr_accessor :input_options
+
     # @return [Inputs] inputs base to transcode
     attr_reader :inputs
 
@@ -24,6 +33,7 @@ module RubyAv
       @output_file = output_file
       @inputs = []
       @maps = []
+      @input_options = []
     end
 
     # for block RubyAv::Encoder.run {|enc| ... }
@@ -42,7 +52,13 @@ module RubyAv
       inputs.map(&:to_a).each { |inp| out_inpts += inp }
       maps.map { |amp| ["-map", amp] }.each { |amp| out_maps += amp }
 
-      [*out_inpts, "-filter_complex", filter_complex, *out_maps]
+      cmd = []
+      cmd += input_options if input_options
+      cmd += out_inpts
+      cmd += ["-filter_complex", filter_complex] if filter_complex
+      cmd += other_options if other_options
+      cmd += out_maps
+      cmd
     end
 
     # Add new [Input] to encoder
@@ -55,12 +71,38 @@ module RubyAv
       inputs << new_input
     end
 
+    # Add new input option
+    #
+    # @param name [String] ffmpeg entry input option
+    # @param value [String]
+    # @return [Array] array of input_options
+    def add_input_option(name, value)
+      self.input_options = [] if input_options.nil?
+      self.input_options += [name, value]
+      self.input_options
+    end
+
+    # Add other options
+    #
+    # @param name [String] ffmpeg entry input option
+    # @param value [String]
+    # @return [Array] array of other_options
+    def add_other_option(name, value)
+      self.other_options = [] if other_options.nil?
+      self.other_options += [name, value]
+      self.other_options
+    end
+
     # Add new -filter_complex to encoder
     #
     # @param filter [String, Symbol] string (to manual filter config) or symbol (to [FilterComplex] filters)
     # @param opts [Hash] hash formated to [FilterComplex] filters
     def add_filter_complex(filter, opts = nil)
-      return send(filter, opts) if filter.is_a?(Symbol)
+      if filter.is_a?(Symbol)
+        filter_class = Object.const_get("RubyAv::Filters::#{filter.to_s.capitalize}").new
+
+        return filter_class.set(self, opts)
+      end
 
       self.filter_complex = "" if filter_complex.nil?
       self.filter_complex += filter
