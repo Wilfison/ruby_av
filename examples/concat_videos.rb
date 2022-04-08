@@ -4,7 +4,7 @@
 require_relative "../lib/ruby_av"
 
 output_path = "#{Dir.pwd}/tmp"
-output_file = "#{output_path}/output.mp4"
+output_file = "#{output_path}/output_concated.mp4"
 
 # starts a new encoder instance with the output file name
 RubyAv::Encoder.run(output_file) do |enc|

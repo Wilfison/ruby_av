@@ -4,7 +4,7 @@
 require_relative "../lib/ruby_av"
 
 output_path = "#{Dir.pwd}/tmp"
-output_file = "#{output_path}/croped_output.mp4"
+output_file = "#{output_path}/trimmed_output.mp4"
 
 # Trim a video file
 RubyAv::Encoder.run(output_file) do |enc|
