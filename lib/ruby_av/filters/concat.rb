@@ -2,8 +2,14 @@ module RubyAv
   module Filters
     # filter complex to concat entries
     class Concat
+      attr_reader :encoder
+
+      def initialize(encoder, _opts = {})
+        @encoder = encoder
+      end
+
       # @return [String] from -filter_complex
-      def set(encoder, _opts)
+      def run
         filter_map = ""
         has_video_stream = false
         has_audio_stream = false
