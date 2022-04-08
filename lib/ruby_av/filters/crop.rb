@@ -15,8 +15,8 @@ module RubyAv
       # @param encoder [Encoder]
       # @param opts [Hash] ex: { width: "400", height: "400", x: "100", y: "323" }
       def run
-        encoder.add_other_option "-filter:v", "crop=#{self[:width]}:#{self[:height]}:#{self[:x]}:#{self[:y]}"
-        encoder.add_other_option "-c:a", "copy"
+        encoder.add_option "-filter:v", "crop=#{self[:width]}:#{self[:height]}:#{self[:x]}:#{self[:y]}"
+        encoder.add_option "-c:a", "copy"
       end
     end
   end

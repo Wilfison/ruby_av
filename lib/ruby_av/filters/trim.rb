@@ -16,7 +16,7 @@ module RubyAv
       def run
         encoder.add_input_option "-ss", self[:start] || "00:00:00"
         encoder.add_input_option "-to", self[:end] || "00:00:05"
-        encoder.add_other_option "-c", "copy"
+        encoder.add_option "-c", "copy"
       end
     end
   end
