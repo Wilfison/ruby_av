@@ -4,6 +4,8 @@ module RubyAv
     class Trim < Hash
       attr_reader :encoder
 
+      # @param encoder [Encoder]
+      # @param opts [Hash] with { start: 'time', end: 'time' }
       def initialize(encoder, opts)
         @encoder = encoder
         super(opts)
@@ -11,8 +13,10 @@ module RubyAv
         merge!(opts)
       end
 
-      # @param encoder [Encoder]
-      # @param opts [Hash] with { start: 'time', end: 'time' }
+      # Example
+      # {include:file:examples/trim.rb}
+      #
+      # @return [Array] Array of Encoder#other_options
       def run
         encoder.add_input_option "-ss", self[:start] || "00:00:00"
         encoder.add_input_option "-to", self[:end] || "00:00:05"

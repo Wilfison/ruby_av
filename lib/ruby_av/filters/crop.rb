@@ -5,6 +5,8 @@ module RubyAv
     class Crop < Hash
       attr_reader :encoder
 
+      # @param encoder [Encoder]
+      # @param opts [Hash] ex: { width: "400", height: "400", x: "100", y: "323" }
       def initialize(encoder, opts)
         @encoder = encoder
         super(nil)
@@ -12,8 +14,10 @@ module RubyAv
         merge!(opts)
       end
 
-      # @param encoder [Encoder]
-      # @param opts [Hash] ex: { width: "400", height: "400", x: "100", y: "323" }
+      # Example
+      # {include:file:examples/crop.rb}
+      #
+      # @return [Array] Array of Encoder#other_options
       def run
         encoder.add_option "-filter:v", "crop=#{self[:width]}:#{self[:height]}:#{self[:x]}:#{self[:y]}"
         encoder.add_option "-c:a", "copy"

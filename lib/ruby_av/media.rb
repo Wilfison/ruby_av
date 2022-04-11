@@ -172,6 +172,7 @@ module RubyAv
       aspect_from_sar || 1
     end
 
+    # @return [Number] Filesize in bytes
     def size
       if local?
         File.size(@path)
@@ -181,9 +182,17 @@ module RubyAv
     end
 
     # Capture screenshot from media
+    # @example
+    #   # capture first frame
+    #   media.screenshot("path/to/output.png")
+    #
+    #   # capture 1 frame on 3s
+    #   # seek_time = HH:MM:SS.MILLISECONDS
+    #   media.screenshot("path/to/output.png", seek_time: "00:00:03")
     #
     # @param output_file [String] path to screenshot output
     # @param options [Hash] with seek_time and frames options
+    # @return [Media]
     def screenshot(output_file, options = {}, validate: true, &block)
       default_opts = options[:vf] ? {} : { screenshot: true, seek_time: "00:00:00", frames: 1 }
       opts = EncodingOptions.new(default_opts.merge!(options))
@@ -241,7 +250,7 @@ module RubyAv
       else
         response
       end
-    rescue SocketError, Errno::ECONNREFUSED => e
+    rescue SocketError, Errno::ECONNREFUSED
       nil
     end
   end

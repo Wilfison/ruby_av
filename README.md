@@ -8,13 +8,10 @@ Based on [Streamio FFMPEG](https://github.com/streamio/streamio-ffmpeg)
 
 ---------------
 
-### Work in progress...
-
----------------
-
 ### Reading Media Metadata
 
 ```ruby
+# load media from Media Class
 media = RubyAv::Media.new("path/to/media.mov")
 
 media.duration # 7.5 (duration of the media in seconds)

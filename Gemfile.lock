@@ -78,6 +78,7 @@ DEPENDENCIES
   rubocop (~> 1.21)
   ruby_av!
   solargraph (~> 0.44.2)
+  yard
 
 BUNDLED WITH
    2.2.33

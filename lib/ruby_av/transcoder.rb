@@ -3,7 +3,12 @@ require "open3"
 module RubyAv
   # Class that executes FFMPEG commands
   class Transcoder
-    attr_reader :command, :output_file, :validate
+    # @return [Array] Final command to execute on FFMPEG
+    attr_reader :command
+    # @return [String] Path to output file
+    attr_reader :output_file
+    # @return [Boolean] Option that validates the output of the file
+    attr_reader :validate
 
     @@timeout = 30
 
@@ -41,6 +46,14 @@ module RubyAv
       @errors.empty?
     end
 
+    # @example Set execution timeout
+    #   # Change the timeout
+    #   Transcoder.timeout = 10
+    #
+    #   # Disable the timeout altogether
+    #   Transcoder.timeout = false
+    #
+    # @return [Integer || Boolean]
     def timeout
       self.class.timeout
     end

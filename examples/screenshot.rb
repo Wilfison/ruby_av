@@ -1,7 +1,7 @@
 #!/usr/bin/env ruby
 # frozen_string_literal: true
 
-require_relative "../lib/ruby_av"
+require "./lib/ruby_av"
 
 output_path = "#{Dir.pwd}/tmp"
 media = RubyAv::Media.new("#{output_path}/input.mp4")
@@ -19,5 +19,5 @@ media.screenshot("#{output_path}/output_5s.png", resolution: "480x640", seek_tim
 
 # Screenshot/Thumbnail every 10 seconds
 # read more about in this post
-# https://trac.ffmpeg.org/wiki/Create%20a%20thumbnail%20image%20every%20X%20seconds%20of%20the%20video
+# @see https://trac.ffmpeg.org/wiki/Create%20a%20thumbnail%20image%20every%20X%20seconds%20of%20the%20video
 media.screenshot("#{output_path}/thumbnail%03d.jpg", { vf: "fps=1/10" }, validate: false)

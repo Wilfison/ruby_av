@@ -1,7 +1,7 @@
 #!/usr/bin/env ruby
 # frozen_string_literal: true
 
-require_relative "../lib/ruby_av"
+require "./lib/ruby_av"
 
 output_path = "#{Dir.pwd}/tmp"
 output_file = "#{output_path}/output_croped.mp4"

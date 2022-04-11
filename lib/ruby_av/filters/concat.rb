@@ -1,6 +1,6 @@
 module RubyAv
   module Filters
-    # filter complex to concat entries
+    # Filter complex to concat entries
     class Concat
       attr_reader :encoder
 
@@ -8,6 +8,9 @@ module RubyAv
         @encoder = encoder
       end
 
+      # Example
+      # {include:file:examples/concat_videos.rb}
+      #
       # @return [String] from -filter_complex
       def run
         filter_map = ""
