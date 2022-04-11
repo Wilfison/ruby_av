@@ -87,9 +87,9 @@ module RubyAv
     # @param name [String] ffmpeg entry input option
     # @param value [String]
     # @return [Array] array of other_options
-    def add_option(name, value)
+    def add_option(name, value = nil)
       self.other_options = [] if other_options.nil?
-      self.other_options += [name, value]
+      self.other_options += [name, value].compact
       self.other_options
     end
 
