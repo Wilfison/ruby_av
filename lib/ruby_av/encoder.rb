@@ -99,7 +99,8 @@ module RubyAv
     # @param opts [Hash] hash formated to [FilterComplex] filters
     def add_filter_complex(filter, opts = nil)
       if filter.is_a?(Symbol)
-        filter_class = Object.const_get("RubyAv::Filters::#{filter.to_s.capitalize}").new(self, opts)
+        filter_mudule = RubyAv::Helpers::String.modularize_str(filter)
+        filter_class = Object.const_get("RubyAv::Filters::#{filter_mudule}").new(self, opts)
 
         return filter_class.run
       end
