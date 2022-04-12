@@ -25,5 +25,22 @@ def reload!
   true
 end
 
+def run_examples!
+  # Main project directory.
+  root_dir = File.expand_path("..", __dir__)
+  # Directories within the project that should be reloaded.
+  reload_dirs = %w[examples]
+  # Loop through and reload every file in all relevant project directories.
+  reload_dirs.each do |dir|
+    Dir.glob("#{root_dir}/#{dir}/**/*.rb").each do |f|
+      puts "Running #{f}"
+
+      load(f)
+    end
+  end
+  # Return true when complete.
+  true
+end
+
 require "irb"
 IRB.start(__FILE__)
