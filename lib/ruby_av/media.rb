@@ -193,7 +193,7 @@ module RubyAv
     # @param output_file [String] path to screenshot output
     # @param options [Hash] with seek_time and frames options
     # @return [Media]
-    def screenshot(output_file, options = {}, validate: true, &block)
+    def screenshot(output_file, options = {}, validate = nil, &block)
       default_opts = options[:vf] ? {} : { screenshot: true, seek_time: "00:00:00", frames: 1 }
       opts = EncodingOptions.new(default_opts.merge!(options))
       raw_options = ["-i", path, *opts.to_a]

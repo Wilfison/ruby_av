@@ -14,6 +14,9 @@ require "ruby_av/input"
 require "ruby_av/encoder"
 require "ruby_av/encoding_options"
 
+require "ruby_av/helpers/string"
+require "ruby_av/helpers/transitions"
+
 # Wrapper for FFMPEG
 #
 # @author Wilfison Batista
