@@ -1,6 +1,3 @@
-#!/usr/bin/env ruby
-# frozen_string_literal: true
-
 output_path = "#{Dir.pwd}/tmp"
 output_file = "#{output_path}/outputs/with_sound_output.mp4"
 

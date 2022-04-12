@@ -1,14 +1,9 @@
-#!/usr/bin/env ruby
-# frozen_string_literal: true
-
-require "./lib/ruby_av"
-
 output_path = "#{Dir.pwd}/tmp"
 
 # Simple Rescaling
 # read more about Scaling
 # @see https://trac.ffmpeg.org/wiki/Scaling
-RubyAv::Encoder.run("#{output_path}/output_hd.mp4") do |enc|
+RubyAv::Encoder.run("#{output_path}/outputs/output_hd.mp4") do |enc|
   # add the input file
   enc.add_input("#{output_path}/input.mp4")
 
